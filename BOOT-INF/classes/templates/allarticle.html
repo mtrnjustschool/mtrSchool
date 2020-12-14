@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AllArticles</title>
+</head>
+<body>
+操作结果：<span th:text="${result}"></span>
+<table>
+    <tr>
+        <th>title</th>
+        <th>brief</th>
+        <th>author</th>
+        <th>url</th>
+        <th>operate</th>
+    </tr>
+    <tr>
+        <form method="post" action="/admin/insert">
+        <td><input type="text" name="title" id="title" /></td>
+        <td><input type="text" name="brief" id="brief" /></td>
+        <td><input type="text" name="author" id="author" /></td>
+        <td><input type="text" name="url" id="url" /></td>
+        <td><input type="submit" value="提交" /></td>
+        </form>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>brief</th>
+        <th>author</th>
+        <th>time</th>
+        <th>url</th>
+        <th>views</th>
+        <th>modifytime</th>
+        <th>update</th>
+        <th>delete</th>
+    </tr>
+    <tr th:each="article:${articles}">
+        <form method="post" action="/admin/update">
+            <td><input readonly="readonly" type="number" name="cuId" id="cuId" th:value="${article.getId()}" /></td>
+            <td><input type="text" name="cuTitle" id="cuTitle" th:value="${article.getTitle()}" /></td>
+            <td><input type="text" name="cuBrief" id="cuBrief" th:value="${article.getBrief()}" /></td>
+            <td><input type="text" name="cuAuthor" id="cuAuthor" th:value="${article.getAuthor()}" /></td>
+            <td><input type="text" name="cuTime" id="cuTime" th:value="${article.getTime()}" /></td>
+            <td><input type="text" name="cuUrl" id="cuUrl" th:value="${article.getUrl()}" /></td>
+            <td><input type="text" name="cuViews" id="cuViews" th:value="${article.getViews()}" /></td>
+            <td><input readonly="readonly" type="text" name="cuModifyTime" id="cuModifyTime" th:value="${article.getModifytime()}" /></td>
+            <td><input type="submit" value="修改" /></td>
+            <td><a th:href="@{/admin/delete(id=${article.getId()})}">删除</a></td>
+        </form>
+    </tr>
+</table>
+</body>
+</html>
